@@ -219,6 +219,9 @@ function DebuggerRunner:run(
         if config.debugger.evaluate_to_string_in_debug_views then
           launch_config.evaluateToStringInDebugViews = true
         end
+        launch_config.vmAdditionalArgs = {"--no-pause-isolates-on-start"}
+        launch_config.toolArgs = { "--no-dds" }
+        -- print('starting with config', vim.inspect(launch_config))
         selected_launch_config = launch_config
         dap.run(launch_config)
       end
@@ -274,6 +277,8 @@ function DebuggerRunner:attach(paths, args, cwd, on_run_data, on_run_exit)
         if config.debugger.evaluate_to_string_in_debug_views then
           launch_config.evaluateToStringInDebugViews = true
         end
+        launch_config.vmAdditionalArgs = {"--no-pause-isolates-on-start"}
+        print('starting with config', vim.inspect(launch_config))
         dap.run(launch_config)
       end
     )
